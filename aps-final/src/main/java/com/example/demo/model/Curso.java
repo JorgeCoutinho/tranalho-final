@@ -20,14 +20,6 @@ public class Curso {
 	@OneToMany(mappedBy = "curso", cascade = CascadeType.ALL)
 	private List<Atividade> atividades;
 
-	public List<Atividade> getAtividades() {
-		return atividades;
-	}
-
-	public void setAtividades(List<Atividade> atividades) {
-		this.atividades = atividades;
-	}
-
 	public Curso() {
 	}
 
@@ -45,6 +37,14 @@ public class Curso {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+
+	public List<Atividade> getAtividades() {
+		return atividades;
+	}
+
+	public void setAtividades(List<Atividade> atividades) {
+		this.atividades = atividades;
 	}
 
 	@Override
@@ -71,5 +71,4 @@ public class Curso {
 			return false;
 		return true;
 	}
-
 }
