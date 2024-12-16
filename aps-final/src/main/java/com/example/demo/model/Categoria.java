@@ -18,13 +18,12 @@ public class Categoria {
 
 	private String nomeCategoria;
 
-	@JsonIgnoreProperties("categoria") // Ignorar o campo "categoria" em Atividade para evitar ciclo
+	@JsonIgnoreProperties("categoria") 
 	@OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
 	private List<Atividade> atividades;
 
 	public Categoria() {}
 
-	// Getters e Setters
 	public Long getId() {
 		return id;
 	}

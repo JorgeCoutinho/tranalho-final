@@ -18,14 +18,13 @@ public class Foto {
 	private String url;
 	private String legenda;
 
-	@JsonIgnoreProperties("fotos") // Ignorar o campo "fotos" em Atividade para evitar ciclo
+	@JsonIgnoreProperties("fotos")
 	@ManyToOne
 	@JoinColumn(name = "atividade_id")
 	private Atividade atividade;
 
 	public Foto() {}
 
-	// Getters e Setters
 	public Long getId() {
 		return id;
 	}

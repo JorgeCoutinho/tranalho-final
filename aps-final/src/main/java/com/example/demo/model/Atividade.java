@@ -20,27 +20,26 @@ public class Atividade {
 
 	private String nome;
 	private String objetivo;
-	private String publicoAlvo; // Corrigido o nome
+	private String publicoAlvo;
 	private boolean publicada;
 	private String data;
 
-	@JsonIgnoreProperties("atividades") // Ignorar a lista de atividades no Curso para evitar ciclo
+	@JsonIgnoreProperties("atividades")
 	@ManyToOne
 	@JoinColumn(name = "curso_id")
 	private Curso curso;
 
-	@JsonIgnoreProperties("atividades") // Ignorar a lista de atividades na Categoria para evitar ciclo
+	@JsonIgnoreProperties("atividades")
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
 
-	@JsonIgnoreProperties("atividade") // Ignorar o campo "atividade" em Foto para evitar ciclo
+	@JsonIgnoreProperties("atividade")
 	@OneToMany(mappedBy = "atividade", cascade = CascadeType.ALL)
 	private List<Foto> fotos;
 
 	public Atividade() {}
 
-	// Getters e Setters
 	public Long getId() {
 		return id;
 	}
@@ -65,7 +64,7 @@ public class Atividade {
 		this.objetivo = objetivo;
 	}
 
-	public String getPublicoAlvo() { // Corrigido o nome do método
+	public String getPublicoAlvo() {
 		return publicoAlvo;
 	}
 
