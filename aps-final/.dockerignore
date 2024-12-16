@@ -1,0 +1,11 @@
+# Ignorar pastas temporárias e de build
+target/
+bin/
+build/
+*.log
+*.class
+*.iml
+.idea/
+.vscode/
+.DS_Store
+node_modules/
