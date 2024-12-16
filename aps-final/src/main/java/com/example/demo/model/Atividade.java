@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
 import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,29 +13,34 @@ import jakarta.persistence.OneToMany;
 
 @Entity
 public class Atividade {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	private String nome;
 	private String objetivo;
-	private String publicoALvo;
+	private String publicoAlvo; // Corrigido o nome
 	private boolean publicada;
 	private String data;
 
+	@JsonIgnoreProperties("atividades") // Ignorar a lista de atividades no Curso para evitar ciclo
 	@ManyToOne
 	@JoinColumn(name = "curso_id")
 	private Curso curso;
 
+	@JsonIgnoreProperties("atividades") // Ignorar a lista de atividades na Categoria para evitar ciclo
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
 
+	@JsonIgnoreProperties("atividade") // Ignorar o campo "atividade" em Foto para evitar ciclo
 	@OneToMany(mappedBy = "atividade", cascade = CascadeType.ALL)
 	private List<Foto> fotos;
 
-	public Atividade() {
-	}
+	public Atividade() {}
 
+	// Getters e Setters
 	public Long getId() {
 		return id;
 	}
@@ -60,12 +65,12 @@ public class Atividade {
 		this.objetivo = objetivo;
 	}
 
-	public String getPublicoALvo() {
-		return publicoALvo;
+	public String getPublicoAlvo() { // Corrigido o nome do método
+		return publicoAlvo;
 	}
 
-	public void setPublicoALvo(String publicoALvo) {
-		this.publicoALvo = publicoALvo;
+	public void setPublicoAlvo(String publicoAlvo) {
+		this.publicoAlvo = publicoAlvo;
 	}
 
 	public boolean isPublicada() {
@@ -107,31 +112,4 @@ public class Atividade {
 	public void setFotos(List<Foto> fotos) {
 		this.fotos = fotos;
 	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Atividade other = (Atividade) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
-
-	
 }
