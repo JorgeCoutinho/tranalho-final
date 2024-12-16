@@ -15,13 +15,17 @@ import com.example.demo.service.AtividadeService;
 @RestController
 @RequestMapping("/atividades")
 public class AtividadeController {
-    
+
     @Autowired
     private AtividadeService atividadeService;
 
     @GetMapping
-    public ResponseEntity<List<Atividade>> listar() {
-        List<Atividade> atividades = atividadeService.listar();
+    public ResponseEntity<List<Atividade>> listarAtividadesFiltradas(
+            @RequestParam(required = false) String data,
+            @RequestParam(required = false) Long idCategoria,
+            @RequestParam(required = false) Long idCurso
+    ) {
+        List<Atividade> atividades = atividadeService.listarAtividadesFiltradas(data, idCategoria, idCurso);
         return ResponseEntity.ok(atividades);
     }
 
