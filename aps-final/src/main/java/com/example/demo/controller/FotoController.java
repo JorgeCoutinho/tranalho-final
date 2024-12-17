@@ -45,7 +45,7 @@ public class FotoController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('SECRETARIA')")
     public ResponseEntity<Foto> criar(@RequestBody FotoDTO fotoDTO) {
         return atividadeService.buscarPorId(fotoDTO.getIdAtividade())
                 .map(atividade -> {

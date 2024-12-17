@@ -25,6 +25,7 @@ public class AtividadeController {
             @RequestParam(required = false) Long idCategoria,
             @RequestParam(required = false) Long idCurso
     ) {
+        
         List<Atividade> atividades = atividadeService.listarAtividadesFiltradas(data, idCategoria, idCurso);
         return ResponseEntity.ok(atividades);
     }
@@ -52,7 +53,7 @@ public class AtividadeController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ADMIN') or hasRole('SECRETARIA')")
     public ResponseEntity<Atividade> atualizar(@PathVariable Long id, @RequestBody AtividadeDTO atividadeDTO) {
         return atividadeService.buscarPorId(id).map(atividadeExistente -> {
             atividadeExistente.setNome(atividadeDTO.getNome());

@@ -20,7 +20,8 @@ public class SecurityConfig {
     public UserDetailsService userDetailsService(PasswordEncoder encoder) {
         var userDetailsManager = new InMemoryUserDetailsManager();
 
-        userDetailsManager.createUser(User.withUsername("admin")
+        userDetailsManager.createUser(
+                User.withUsername("admin")
                 .password(encoder.encode("admin123"))
                 .roles("ADMIN")
                 .build());
@@ -35,6 +36,7 @@ public class SecurityConfig {
                 .roles("SECRETARIA")
                 .build());
 
+
         return userDetailsManager;
     }
 
@@ -48,7 +50,12 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/cursos/**").permitAll()
+                        .requestMatchers(
+                        "/cursos/**",
+                                "/fotos/**",
+                                "/categorias/**",
+                                "/atividades/**"
+                                ).permitAll()
                         .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults());
         return http.build();
