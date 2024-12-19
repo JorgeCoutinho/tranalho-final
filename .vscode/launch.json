@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ApsFinalApplication<aps-final>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.demo.ApsFinalApplication",
+            "projectName": "aps-final",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
