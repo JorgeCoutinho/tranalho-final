@@ -4,6 +4,7 @@ public class CursoDTO {
     private String nome;
     private AtividadeDTO atividade;
 
+    
     public String getNome() {
         return nome;
     }
