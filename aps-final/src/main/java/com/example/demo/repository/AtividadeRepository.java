@@ -21,4 +21,5 @@ public interface AtividadeRepository extends JpaRepository<Atividade,Long>{
    List<Atividade> findByDataAndCursoId(String data, Long idCurso);
 
    List<Atividade> findByCategoriaIdAndCursoId(Long idCategoria, Long idCurso);
+   
 }
