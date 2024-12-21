@@ -16,48 +16,47 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-        var userDetailsManager = new InMemoryUserDetailsManager();
+        @Bean
+        public UserDetailsService userDetailsService(PasswordEncoder encoder) {
+                var userDetailsManager = new InMemoryUserDetailsManager();
 
-        userDetailsManager.createUser(
-                User.withUsername("admin")
-                .password(encoder.encode("admin123"))
-                .roles("ADMIN")
-                .build());
+                userDetailsManager.createUser(
+                                User.withUsername("admin")
+                                                .password(encoder.encode("admin123"))
+                                                .roles("ADMIN")
+                                                .build());
 
-        userDetailsManager.createUser(User.withUsername("gerente")
-                .password(encoder.encode("gerente123"))
-                .roles("GERENTE")
-                .build());
+                userDetailsManager.createUser(User.withUsername("gerente")
+                                .password(encoder.encode("gerente123"))
+                                .roles("GERENTE")
+                                .build());
 
-        userDetailsManager.createUser(User.withUsername("secretaria")
-                .password(encoder.encode("secretaria123"))
-                .roles("SECRETARIA")
-                .build());
+                userDetailsManager.createUser(User.withUsername("secretaria")
+                                .password(encoder.encode("secretaria123"))
+                                .roles("SECRETARIA")
+                                .build());
 
+                return userDetailsManager;
+        }
 
-        return userDetailsManager;
-    }
+        @Bean
+        public PasswordEncoder passwordEncoder() {
+                return new BCryptPasswordEncoder();
+        }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                        "/cursos/**",
-                                "/fotos/**",
-                                "/categorias/**",
-                                "/atividades/**"
-                                ).permitAll()
-                        .anyRequest().authenticated())
-                .httpBasic(Customizer.withDefaults());
-        return http.build();
-    }
+        @Bean
+        public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+                http
+                                .csrf(csrf -> csrf.disable())
+                                .authorizeHttpRequests(auth -> auth
+                                                .requestMatchers(
+                                                                "/cursos/**",
+                                                                "/fotos/**",
+                                                                "/categorias/**",
+                                                                "/atividades/**")
+                                                .permitAll()
+                                                .anyRequest().authenticated())
+                                .httpBasic(Customizer.withDefaults());
+                return http.build();
+        }
 }
